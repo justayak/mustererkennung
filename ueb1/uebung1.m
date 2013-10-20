@@ -11,8 +11,6 @@ lookup=[0, false,1;1, false, 2;2, false,3;3, false,4;
 
 count=0;
 
-B=[1 5,2 2,4 1,5 6,2 5,1 0,2 1,4 2,0 1];
-
 figure;
 
 for i=1:size(M,1),
