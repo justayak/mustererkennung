@@ -3,12 +3,12 @@ close all
 clear all 
 clc
 
-
-disp('In der Matrix Y mit n Spalten stehen die Ergebnisse in der folgenden Reihenfolge:')
-disp('Spalte 1 bis anz : Die nächsten anz Zahlen, mit der kleinsten Entfernung zum Punkt.')
-disp('Spalte n-1: Das korrekte Ergebnis zum Vergleich')
-disp('Spalte n: Das gefundene Ergebnis.')
-
+%disp('In der Matrix Y mit n Spalten stehen die Ergebnisse in der folgenden')
+%disp('Reihenfolge:')
+%disp('Spalte 1 bis anz : Die ersten anz Zahlen, mit der kleinsten') 
+%disp('Entfernung zum Punkt.')
+%disp('Spalte n-1: Das korrekte Ergebnis zum Vergleich')
+%disp('Spalte n: Das gefundene Ergebnis.')
 
 filedata = dlmread ('pendigits-training.txt');
 testdata = dlmread('pendigits-testing.txt');
@@ -17,28 +17,11 @@ A = createns(filedata(1:end, 1:end-1),'distance', 'euclidean');
 
 sze = size(testdata);                                %Größe von Testdata
 
-
-
-
-%mit einem nächsten Nachbarn  ---  ---  ---
-
-%X = ones(sze(1),3);                                 %Erstellt eine Matrix mit der richtigen Größe
-
-%for i = 1 : sze(1)
-%    X(i,1) = knnsearch(A, testdata(i, 1:end-1));    %Ergebnis nächster Nachbar (als Zeile) - Ein Nachbar
-%    X(i,2) = testdata(i,end);                       %Das erwartete (richtige) Ergebnis.
-%    X(i,3) = filedata( (X(i,1)), end);              %Das gefundene Ergebnis aus der Trainingsmenge
-%end
-
-% -----------------------------------------
-
-
-
-
-
-
 %Mit n nächsten Nachbarn:
 anz = 3;                                            %Anzahl der NN
+
+sprintf('Die Berechnung erfolgt mit %d nächsten Nachbarn. Bitte warten...', anz)
+
 Y = ones(sze(1), anz + 2);                          %Erstellt eine Matrix mit der richtigen Größe
 
 for n = 1 : sze(1)
@@ -60,7 +43,9 @@ end
 treffer = trace(CM);
 gesamt = sum(CM(:));
 disp(CM);
-ergebnis = treffer / gesamt
+ergebnis = treffer / gesamt;
+
+sprintf('Die Trefferquote liegt bei %f Prozent.', ergebnis)
 
 
     
