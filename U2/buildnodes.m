@@ -7,22 +7,25 @@ function node = buildnodes( data )
     sze = size(data);               % sze ist Zeilen mal Spalten
     v = var(data);                  % Berechnet automatisch die Varianz
 
-    if ( v(1) >= v(2) )
-        sortrows(data, 1);          % sortieren nach x
+    if ( v(1) > v(2) )
+        data = sortrows(data, 1);          % sortieren nach x
         node.dim = 1;               % wenn 1 dann nach x geteilt
     else 
-        sortrows(data, 2);          % sortieren nach y
+        data = sortrows(data, 2);          % sortieren nach y
         node.dim = 1;               % wenn 1 dann nach y geteilt
     end
 
     mid = floor(sze/2);             % Berechnung des Mittelwerts
 
-    node.exists = 1;                % Hiilfsvariable für die Suchfunktion
+    node.exists = 1;                % Hilfsvariable für die Suchfunktion
     node.valX = data(mid(1),1);     % Zuweisung der Werte für X 
     node.valY = data(mid(1),2);     % und Y
     
-    left = data(1:mid(1)-1, :);     % Unterteilung der Liste in die Elemente
-    right = data(mid(1)+1:end, :);  % links und rechts von mid
+    left = data(1:mid(1)-1, :);     % Unterteilung der Liste in die Elemente    Links bekommt kleine Werte
+    right = data(mid(1)+1:end, :);  % links und rechts von mid                  Recht bekommt große Werte
+    
+    disp(left);
+    disp(right);
     
     node.left = next(left, node);   % Berechnung der Unterknoten
     node.right = next(right, node);
@@ -44,11 +47,11 @@ function nextnode = next( data , parent)
 
         mid = floor(sze/2);
 
-        if ( v(1) >= v(2) )
-            sortrows(data, 1);
+        if ( v(1) > v(2) )
+            data = sortrows(data, 1);
             nextnode.dim = 1;       % wenn 1 dann nach x geteilt
         else 
-            sortrows(data, 2);
+            data = sortrows(data, 2);
             nextnode.dim = 2;       % wenn 2 dann nach y geteilt
         end
 
@@ -84,10 +87,10 @@ function nextnode = next( data , parent)
         %disp('Letzte Größe war 2')
         v = var(data);
         if ( v(1) >= v(2) )
-            sortrows(data, 1);
+            data = sortrows(data, 1);
             nextnode.dim = 1;    % wenn 1 dann nach x geteilt
         else 
-            sortrows(data, 2);
+            data = sortrows(data, 2);
             nextnode.dim = 2;    % wenn 2 dann nach y geteilt
         end
         
@@ -102,7 +105,8 @@ function nextnode = next( data , parent)
         nextnode.valY = data(1, 2);
         nextnode.dim = 0;
         nextnode.left.exists = 0;
-        nextnode.right.exists = 0;   
+        nextnode.right.exists = 0; 
+        
     end;
     return;
 end 

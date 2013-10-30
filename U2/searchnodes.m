@@ -6,9 +6,9 @@ function [value, anz] = searchnodes(point, node)
     nn.point = [node.valX, node.valY];
     
     if (node.dim == 1)                                      
-        if (point(1) > node.valX)            
+        if (point(1) < node.valX)    %>        
             [nn, anz] = searchrec (point, node.left, anz+1, nn);
-            if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
+            if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))    %Wenn dist einen Schnitt überschreitet...
                 %disp('Hello');
                 [nn, anz] = searchrec(point, node.right, anz+1, nn); 
             end
@@ -20,7 +20,7 @@ function [value, anz] = searchnodes(point, node)
             end
         end 
     elseif (node.dim == 2)
-        if (point(2) > nodes.valY)
+        if (point(2) < node.valY) %>
             [nn, anz] = searchrec (point, node.left, anz+1, nn);
             if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
                 %disp('Hello');
@@ -49,33 +49,33 @@ function [value, anz2] = searchrec( point, node , anz, nn)
         end
 
         if (node.dim == 1)     
-            if (point(1) > node.valX)
+            if (point(1) < node.valX)   %>
                 [nn, anz] = searchrec (point, node.left, anz+1, nn);
                 if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
-                    %disp('Hello');
+                    disp('Hello');
                     %disp(nn);
                     searchrec(point, node.right, anz+1, nn); 
                 end
             else
                 [nn, anz] = searchrec (point, node.right, anz+1, nn);
                 if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
-                    %disp('Hello');
+                    disp('Hello');
                     %disp(nn);
                     searchrec(point, node.left, anz+1, nn); 
                 end
             end
         elseif (node.dim == 2)
-            if (point(2) > node.valY)
+            if (point(2) < node.valY)   %>
                 [nn, anz] = searchrec (point, node.left, anz+1, nn);
                 if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
-                    %disp('Hello');
+                    disp('Hello');
                     %disp(nn);
                     searchrec(point, node.right, anz+1, nn); 
                 end
             else
                 [nn, anz] = searchrec (point, node.right, anz+1, nn);
                 if (nn.dist > pdist( [nn.point(1), nn.point(2); node.valX, node.valY], 'euclidean'))
-                    %disp('Hello');
+                    disp('Hello');
                     %disp(nn);
                     searchrec(point, node.left, anz+1, nn); 
                 end
