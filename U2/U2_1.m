@@ -30,6 +30,9 @@ disp(checksearch( [0.5,0.5] , data));
 [value, anz] = searchnodes( [0.9,0.3] ,  a);    % searchnodes durchsucht den Baum.
 sprintf ('Der nächste Punkt zu 0.9/0.3 ist %f/%f', value(1), value(2))
 sprintf ('Kontrolllösung:'); 
+entf = (checksearch( [0.9,0.3] , data));
+
+%disp ( pdist( [entf(1,1), entf(1,2); 0.9, 0.3] ,'euclidean') );
 disp(checksearch( [0.9,0.3] , data));
 
 disp('Ready')

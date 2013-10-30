@@ -24,8 +24,8 @@ function node = buildnodes( data )
     left = data(1:mid(1)-1, :);     % Unterteilung der Liste in die Elemente    Links bekommt kleine Werte
     right = data(mid(1)+1:end, :);  % links und rechts von mid                  Recht bekommt große Werte
     
-    disp(left);
-    disp(right);
+    %disp(left);
+    %disp(right);
     
     node.left = next(left, node);   % Berechnung der Unterknoten
     node.right = next(right, node);
@@ -63,18 +63,12 @@ function nextnode = next( data , parent)
         szeL = size(left);
         szeR = size(right);
         
-        %disp('Calc left node');
-        %disp(left);
-        %disp(size(left));
         if (szeL(1) > 0)
             nextnode.left = next(left, nextnode);
         else
             nextnode.left.exists = 0;
         end
         
-        %disp('Calc right node');
-        %disp(right);
-        %disp(size(right));
         if (szeR(1) > 0)
             nextnode.right = next(right, nextnode);
         else
@@ -96,8 +90,8 @@ function nextnode = next( data , parent)
         
         nextnode.valX = data(1, 1);
         nextnode.valY = data(1, 2);
-        nextnode.left = next(data(2,1:end), nextnode);
-        nextnode.right.exists = 0;
+        nextnode.right = next(data(2,1:end), nextnode);
+        nextnode.left.exists = 0;
         
     elseif (sze(1) == 1)
         nextnode.exists = 1;
