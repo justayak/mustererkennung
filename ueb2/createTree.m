@@ -14,6 +14,6 @@ function createTree(M, Tree)
      end
      
      point = Node;
-     point.
+     
      
 end
