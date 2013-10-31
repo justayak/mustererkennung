@@ -40,6 +40,7 @@ classifiedOne = [];
 
 for i = (1:size(V,1))
     x = V(i,1);
+    % Dichtefunktion
     pFeatureZero = (1 / sqrt(2*pi*varianzZero)) * exp( -(x - ExZero)^2 / (2*varianzZero));
     pFeatureOne = (1 / sqrt(2*pi*varianzOne)) * exp( -(x - ExOne)^2 / (2*varianzOne));
     evidence = aPrioriZero * pFeatureZero + aPrioriOne * pFeatureOne;
