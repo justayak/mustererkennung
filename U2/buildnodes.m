@@ -8,15 +8,16 @@ function node = buildnodes( data )
     v = var(data);                  % Berechnet automatisch die Varianz
 
     if ( v(1) > v(2) )
-        data = sortrows(data, 1);          % sortieren nach x
+        data = sortrows(data, 1);   % sortieren nach x
         node.dim = 1;               % wenn 1 dann nach x geteilt
     else 
-        data = sortrows(data, 2);          % sortieren nach y
-        node.dim = 1;               % wenn 1 dann nach y geteilt
+        data = sortrows(data, 2);   % sortieren nach y
+        node.dim = 2;               % wenn 1 dann nach y geteilt
     end
 
     mid = floor(sze/2);             % Berechnung des Mittelwerts
-
+    %disp(mid);
+    
     node.exists = 1;                % Hilfsvariable für die Suchfunktion
     node.valX = data(mid(1),1);     % Zuweisung der Werte für X 
     node.valY = data(mid(1),2);     % und Y
@@ -32,27 +33,23 @@ function node = buildnodes( data )
     return;
 end
 
-function nextnode = next( data , parent)
-    
-    sze = size(data);
-    %disp(sze(1));
-    
+function nextnode = next( data , parent)   
+    sze = size(data);  
     nextnode.exists = 1;
     
-    %nextnode.parent = parent;      % Wenn aktiv, dann hängt sich Matlab auf
+    %nextnode.parent = parent;          % Wenn aktiv, dann hängt sich Matlab auf
     
-    if (sze(1) > 2)                 % Wenn noch mehr als zwei Elemente in der Liste sind 
-                                    % (dann können auch noch mehr als 2 Knoten gebildet werden).
+    if (sze(1) > 2)                     % Wenn noch mehr als zwei Elemente in der Liste sind 
+                                        % (dann können auch noch mehr als 2 Knoten gebildet werden).
         v = var(data);                  
-
         mid = floor(sze/2);
 
         if ( v(1) > v(2) )
             data = sortrows(data, 1);
-            nextnode.dim = 1;       % wenn 1 dann nach x geteilt
+            nextnode.dim = 1;           % wenn 1 dann nach x geteilt
         else 
             data = sortrows(data, 2);
-            nextnode.dim = 2;       % wenn 2 dann nach y geteilt
+            nextnode.dim = 2;           % wenn 2 dann nach y geteilt
         end
 
         nextnode.valX = data(mid(1), 1);
@@ -77,15 +74,13 @@ function nextnode = next( data , parent)
           
     elseif (sze(1) == 2)
         nextnode.exists = 1;
-        
-        %disp('Letzte Größe war 2')
         v = var(data);
         if ( v(1) >= v(2) )
             data = sortrows(data, 1);
-            nextnode.dim = 1;    % wenn 1 dann nach x geteilt
+            nextnode.dim = 1;           % wenn 1 dann nach x geteilt
         else 
             data = sortrows(data, 2);
-            nextnode.dim = 2;    % wenn 2 dann nach y geteilt
+            nextnode.dim = 2;           % wenn 2 dann nach y geteilt
         end
         
         nextnode.valX = data(1, 1);
@@ -99,8 +94,7 @@ function nextnode = next( data , parent)
         nextnode.valY = data(1, 2);
         nextnode.dim = 0;
         nextnode.left.exists = 0;
-        nextnode.right.exists = 0; 
-        
+        nextnode.right.exists = 0;   
     end;
     return;
 end 
