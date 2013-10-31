@@ -75,3 +75,21 @@ end
 
 %final confusion matrix:
 ClassifiedConfusion
+
+% Normalverteilung:
+% E(X)_0 : 9.9794
+% E(X)_1 : 19.9620
+% var(1) : 8.5573
+% var(0) : 3.9540
+
+
+% A-priori:
+% 0: 0.666
+% 1: 0.333
+
+% Confusionmatrix:
+% |      0      1|
+% |--------------|  0 als 0 erkannt: 9885
+% |0| 9885 |  186|  1 als 1 erkannt: 5814
+% |1|  115 | 5814|  0 als 1 erkannt: 115
+% |--------------|  1 als 0 erkannt: 186
