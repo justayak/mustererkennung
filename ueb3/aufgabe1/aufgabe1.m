@@ -1,4 +1,4 @@
-function [] = aufgabe1()
+function [stuff] = aufgabe1()
     clear;        
     Tr = dlmread('pendigits-training.txt');
 
@@ -61,13 +61,20 @@ end
 
 function [result] = mvNormverteilung(covMatrix, list)
 
-    mu = mean(list);
-
+    mu = mean(list)';
+    X = list(6,:)';
     absSigma = det(covMatrix);
-    invAbsSigma = det( inv (covMatrix));
-    for i=1:16
-        
-    end
+    icovar = inv(covMatrix);
+    
+    xmu = X-mu;
+    transpo = xmu';
+    a = transpo * icovar;
+    expo = (-(1/2)) * a * xmu;
+    
+    first = (1 / ((2*pi).^(16/2) * absSigma.^(1/2)));
+    second = exp(1).^(expo);
+    result =  first * second;
+    
 
 end
 
@@ -75,10 +82,13 @@ function [result] = cov (list)
    X = list(1,:);
    result = zeros(16);
    mu = mean(list);
-   varianz = var(list);
+   %varianz = var(list);
    for i=1:16
        for j=1:16
            result(i,j) = mean((X(j)-mu(j)) * (X(i)-mu(i)));
+           if result(i,j) == 0
+            result(i,j) = 0.001;
+           end
        end
    end
 
