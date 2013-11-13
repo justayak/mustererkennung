@@ -19,8 +19,6 @@ function aufgabe1()
     mu1 = mean(zeros);
     mu2 = mean(ones);
     
-    
-    
     v = randn(1000,16);
     v = bsxfun(@rdivide,v,sqrt(sum(v.^2,2)));
 
@@ -30,7 +28,7 @@ function aufgabe1()
       
         % Abstand auf u(i) projizierten Mittelwerte
         top = (mu1 * v(i,:)' - mu2 * v(i,:)');
-        top = (top * top')^2;
+        top = (top * top');
         
         % Summe der auf u(i) projizierten Varianzen
         bottom = ( (v(i,:) * cov0 * v(i,:)') + (v(i,:) * cov1 * v(i,:)'));
@@ -42,6 +40,5 @@ function aufgabe1()
     
     m = max(u)
     
-%     m =
-%    4.8371e+05
+    % m = 28.3439
 end
