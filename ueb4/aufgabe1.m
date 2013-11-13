@@ -13,11 +13,35 @@ function aufgabe1()
     end
     
     
-    cov0 = cov(zeros');
-    cov1 = cov(ones');
+    cov0 = cov(zeros);
+    cov1 = cov(ones);
     
-    mu1 = mean(zeros');
-    mu2 = mean(ones')
+    mu1 = mean(zeros);
+    mu2 = mean(ones);
     
-end 
+    
+    
+    v = randn(1000,16);
+    v = bsxfun(@rdivide,v,sqrt(sum(v.^2,2)));
 
+    u = [];
+    
+    for i=1:1000
+      
+        % Abstand auf u(i) projizierten Mittelwerte
+        top = (mu1 * v(i,:)' - mu2 * v(i,:)');
+        top = (top * top')^2;
+        
+        % Summe der auf u(i) projizierten Varianzen
+        bottom = ( (v(i,:) * cov0 * v(i,:)') + (v(i,:) * cov1 * v(i,:)'));
+       
+        % Fisher-Kriterium
+        u = [u ; (top / bottom )];
+        
+    end
+    
+    m = max(u)
+    
+%     m =
+%    4.8371e+05
+end
